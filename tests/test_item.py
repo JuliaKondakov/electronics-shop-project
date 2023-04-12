@@ -34,7 +34,7 @@ def test_string_to_number():
     # Проверяем, что метод возвращает корректные значения для строк с числами
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
-
+    assert Item.string_to_number('5.5') == 5
 
 def test_repr():
     item1 = Item("Смартфон", 10000, 20)
@@ -44,3 +44,27 @@ def test_repr():
 def test_str():
     item1 = Item("Смартфон", 10000, 20)
     assert str(item1) == 'Смартфон'
+
+
+"""
+Homework-4
+"""
+
+from src.phone import Phone
+
+
+def test__str__():
+    phone = Phone("iPhone 14", 120000, 5, 2)
+    assert str(phone) == "iPhone 14"
+
+
+def test__repr__():
+    phone = Phone("iPhone 14", 120000, 5, 2)
+    assert repr(phone) == "Phone('iPhone 14', 120000, 5, 2)"
+
+
+def test_add_item():
+    phone = Phone("iPhone 14", 120000, 5, 2)
+    item = Item("Смартфон", 10000, 20)
+    assert (phone + item) == 25
+
