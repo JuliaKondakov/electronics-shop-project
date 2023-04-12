@@ -1,11 +1,9 @@
 import csv
 
+
 class Item:
 
-    """
-    Класс для представления товара в магазине.
-    """
-    pay_rate = 0.8      # атрибут кл.
+    pay_rate = 0.8
     all = []
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
@@ -32,32 +30,24 @@ class Item:
         return self.total
 
     def apply_discount(self) -> None:
-        """
-        Применяет установленную скидку для конкретного товара.
-        """
+        """Применяет установленную скидку для конкретного товара."""
         self.price = self.price * self.pay_rate
 
-        """
-        геттер и сеттер для name, используя @property
-        """
     @property
     def name(self):
+        """геттер название товара"""
         return self.__name
 
-    """
-    в сеттере name проверять, что длина наименования товара не больше 10 симвовов
-    """
     @name.setter
     def name(self, name):
+        """сеттер на название, длинну имени"""
         if len(name) > 10:
             raise ValueError('Имя не должно превышать 10 символов')
         self.__name = name
 
-    """добовляем класс-метод, 
-    инициализирующий экземпляры класса Item данными из файла src/items.csv
-    """
     @classmethod
     def instantiate_from_csv(cls):
+        """добовляем класс-метод"""
         with open('../src/items.csv', 'r', encoding='cp1251') as f:
             reader = csv.DictReader(f)
             for row in reader:
@@ -66,24 +56,21 @@ class Item:
                 quantity = int(row['quantity'])
                 item = cls(name, price, quantity)
                 print(item)
-    """
-    string_to_number() - статический метод,
-    возвращающий число из числа-строки
-    """
+
     @classmethod
     def string_to_number(cls, param):
+        """Преобразование из чтроки в число"""
         if isinstance(param, str):
-            return int(param)
+            return int(float(param))
 
     def __repr__(self):
-        return f'Item(name={self.__name}, price={self.price}, quantity={self.quantity})'
+        return f"{self.__class__.__name__}('{self.__name}',{self.price}, {self.quantity})"
 
     def __str__(self):
-        return self.__name
+        return f"{self.__name}"
 
-    def __add__(self, other):
-        return self.quantity + other.quantity
+    #def __add__(self, other):
+     #   return self.quantity + other.quantity
 
 
-item1 = Item("Смартфон", 10000, 20)
-
+#item1 = Item("Смартфон", 10000, 20)
