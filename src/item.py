@@ -47,6 +47,7 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
+        cls.all = []
         """добовляем класс-метод"""
         with open('../src/items.csv', 'r', encoding='cp1251') as f:
             reader = csv.DictReader(f)
@@ -63,14 +64,17 @@ class Item:
         if isinstance(param, str):
             return int(float(param))
 
+    def __add__(self, other):
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
+        elif isinstance(other, Phone):
+            return self.quantity + other.quantity
+        else:
+            return NotImplemented
+
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.__name}',{self.price}, {self.quantity})"
 
     def __str__(self):
         return f"{self.__name}"
 
-    #def __add__(self, other):
-     #   return self.quantity + other.quantity
-
-
-#item1 = Item("Смартфон", 10000, 20)

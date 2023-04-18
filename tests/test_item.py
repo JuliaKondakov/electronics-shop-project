@@ -25,9 +25,14 @@ def test_apply_discount(item1):
 
 def test_name(item1):
     item.name = 'Смартфон'
-    assert item.name == 'Смартфон'
-    item.name = 'СуперСмартфон'
-    assert item.name == 'СуперСмартфон'
+    assert item1.name == 'Смартфон'
+    with pytest.raises(ValueError):
+        item1.name = 'СуперСмартфон'
+
+
+def test_instantiate_from_csv(item1):
+    Item.instantiate_from_csv()
+    assert len(Item.all) == 5
 
 
 def test_string_to_number(item1):
@@ -47,23 +52,6 @@ def test_repr(item1):
 def test_str(item1):
     assert str(item1) == 'Смартфон'
 
-"""Homework-4"""
-
-#from src.phone import Phone
 
 
-#def test__str__():
- #   phone = Phone("iPhone 14", 120000, 5, 2)
-  #  assert str(phone) == "iPhone 14"
-
-
-#def test__repr__():
-   # phone = Phone("iPhone 14", 120000, 5, 2)
- #   assert repr(phone) == "Phone('iPhone 14', 120000, 5, 2)"
-
-
-#def test_add_item():
- #   phone = Phone("iPhone 14", 120000, 5, 2)
-  #  item = Item("Смартфон", 10000, 20)
-   # assert (phone + item) == 25
 
