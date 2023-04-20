@@ -64,17 +64,13 @@ class Item:
         if isinstance(param, str):
             return int(float(param))
 
-    def __add__(self, other):
-        if isinstance(other, Item):
-            return self.quantity + other.quantity
-        elif isinstance(other, Phone):
-            return self.quantity + other.quantity
-        else:
-            return NotImplemented
-
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.__name}',{self.price}, {self.quantity})"
 
     def __str__(self):
         return f"{self.__name}"
 
+    def __add__(self, other):
+        if not isinstance(other, Item):
+            raise TypeError("Item must be an instance of Item")
+        return self.quantity + other.quantity

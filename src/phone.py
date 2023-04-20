@@ -19,23 +19,11 @@ class Phone(Item):
             raise ValueError("Количество физических SIM-карт должно быть целым числом больше нуля.")
         self._number_of_sim = value
 
-    def __add__(self, other):
-        if isinstance(other, Phone):
-            return Phone(
-                self.name + other.name,
-                self.price + other.price,
-                self.quantity + other.quantity,
-                self.number_of_sim + other.number_of_sim,
-            )
-        elif isinstance(other, Item):
-            return Item(
-                self.name + other.name,
-                self.price + other.price,
-                self.quantity + other.quantity,
-            )
-        else:
-            raise TypeError("Unsupported operand types")
-
     def __repr__(self):
         return f"Phone('{self.name}', {self.price}, {self.quantity}, {self.number_of_sim})"
 
+    def __add__(self, other):
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
+        else:
+            raise TypeError("Item must be an instance of Item")
